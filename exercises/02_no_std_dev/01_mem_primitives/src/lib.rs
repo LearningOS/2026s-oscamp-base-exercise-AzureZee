@@ -106,13 +106,22 @@ pub unsafe extern "C" fn my_strlen(s: *const u8) -> usize {
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn my_strcmp(s1: *const u8, s2: *const u8) -> i32 {
     // TODO: Implement strcmp
-    let s1 = my_strlen(s1);
-    let s2 = my_strlen(s2);
-    match s1.cmp(&s2) {
-        Ordering::Less => -1,
-        Ordering::Equal => 0,
-        Ordering::Greater => 1,
+    let mut i = 0;
+    let mut ord = 0;
+    loop {
+        let (a, b) = ((*s1.add(i)), (*s2.add(i)));
+        if a != b'\0' && b != b'\0' {
+            i += 1;
+            ord = match a.cmp(&b) {
+                Ordering::Less => -1,
+                Ordering::Equal => 0,
+                Ordering::Greater => 1,
+            }
+        } else {
+            break;
+        }
     }
+    ord
 }
 
 // ============================================================
@@ -191,13 +200,13 @@ mod tests {
     #[test]
     fn test_strcmp_less() {
         let a = b"abc\0";
-        let b = b"abcd\0";
+        let b = b"abd\0";
         assert!(unsafe { my_strcmp(a.as_ptr(), b.as_ptr()) } < 0);
     }
 
     #[test]
     fn test_strcmp_greater() {
-        let a = b"abcd\0";
+        let a = b"abd\0";
         let b = b"abc\0";
         assert!(unsafe { my_strcmp(a.as_ptr(), b.as_ptr()) } > 0);
     }
