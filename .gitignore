@@ -20,3 +20,4 @@ Thumbs.db
 # Debug information
 *.dSYM/
 *.pdb
+/AGENTS.md
