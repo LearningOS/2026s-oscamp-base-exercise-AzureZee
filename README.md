@@ -1,5 +1,49 @@
 # OS Camp - Rust & OS Advanced Experiments
 
+## 2026春夏季开源操作系统训练营 - 基础阶段实验
+
+本仓库是2026春夏季开源操作系统训练营的基础阶段实验，旨在通过实践练习帮助学员掌握Rust高级编程和操作系统核心概念。
+
+### 致学员的 AI 使用指南
+
+我们鼓励学员合理使用 AI 工具辅助学习，但请注意：
+⚠️ 直接复制 AI 生成的答案如同「空中楼阁」—— 您将失去：
+
+- 对 Rust 底层原理的深刻认知
+- 排错调试的关键能力培养
+- 从错误中成长的珍贵机会
+
+✅ 正确打开方式：
+
+- 先用手工实现理解基础流程
+- 用 AI 优化时追问「为什么这样修改」
+- 在本地反复验证每个命令的效果
+
+### 操作流程
+
+1. 在网络浏览器中用自己的账号登录 [cnb.cool](https://cnb.cool)。
+2. Fork 本仓库, 解锁作业副本。
+3. 在您 Fork 的仓库中点击 main 分支旁的「云原生开发」按钮，即可启动在线开发环境（WebIDE，也可以使用 SSH 进行远程连接），自动配置好 Rust 工具链。
+4. 在 WebIDE 的终端中执行 `./target/debug/oscamp watch`，即可开始练习。
+5. 完成练习后，将代码提交至远程仓库，并创建 PR，在 PR 页面会自动运行测评流水线。
+6. 最后可以在 PR 页面来查看评分过程（可多次提交代码，每次提交都会触发评分，以最高分为准）
+7. 最终成绩会显示在 opencamp.cn 的个人中心以及课程页面的晋级榜单处。
+
+### 温馨提示: CNB平台成绩提交指南
+
+- a. 注册opencamp和 cnb平台账号
+- b. 登录opencamp，点击编辑个人信息
+- c. 下拉页面，找到CNBName和GithubName (填入正确的账号用户名）
+- d. 不记得CNB账户看这里 --> [点此查询CNB账号信息](https://cnb.cool/profile/account)
+- 新建cnb，默认用户名是cnb.xxx（填入步骤c即可）
+- 等待CI测评流水线运行，提交PR，就会更新成绩
+
+### 注意事项
+
+- 上述步骤有任何问题都可以找助教。
+
+---
+
 A Rust advanced and operating system introductory exercise repository in the style of [rustlings](https://github.com/rust-lang/rustlings).
 Learn Rust concurrency programming, async programming, `no_std` development, and operating system core concepts through completing code and passing tests.
 
@@ -134,12 +178,13 @@ cargo test --workspace
 
 ## Submitting Scores
 
-Push to the `main` branch of your repository to trigger the scoring pipeline. GitHub Actions will automatically run all tests, calculate your score (out of 100), and upload it to the OpenCamp leaderboard.
+This repository uses a CI pipeline to automatically score your exercises and submit results to the leaderboard.
 
-1. Accept the GitHub Classroom assignment link — this creates your personal repository
-2. Complete exercises locally or in **GitHub Codespaces** (click "Code" > "Codespaces" > "Create")
-3. Commit and push your changes to `main`
-4. Check the "Actions" tab to see your score
+1. Fork this repository on [CNB](https://cnb.cool)
+2. Complete exercises locally or in the cloud-native WebIDE
+3. Push your changes to your fork
+4. Create a **Pull Request** to the upstream repository — this triggers the scoring pipeline
+5. The pipeline runs all tests, calculates your score (out of 100), and uploads it to the OpenCamp leaderboard
 
 ## Notes
 
