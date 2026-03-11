@@ -7,17 +7,22 @@
 //! - `JoinHandle` waits for task completion
 //! - Concurrent execution between asynchronous tasks
 
-use tokio::task::JoinHandle;
 use tokio::time::{sleep, Duration};
 
 /// Concurrently compute the square of each number in 0..n, collect results and return in order.
 ///
 /// Hint: Create `tokio::spawn` task for each i, collect JoinHandle, await them sequentially.
 pub async fn concurrent_squares(n: usize) -> Vec<usize> {
-    // TODO: Create n asynchronous tasks, each computing i * i
-    // TODO: Collect all JoinHandle
-    // TODO: Await each one to get result
-    todo!()
+    use tokio::spawn;
+    let mut tasks = Vec::with_capacity(n);
+    for i in 0..n {
+        tasks.push(spawn(async move { i * i }));
+    }
+    let mut ret = Vec::with_capacity(tasks.len());
+    for task in tasks {
+        ret.push(task.await.unwrap());
+    }
+    ret
 }
 
 /// Concurrently execute multiple "time-consuming" tasks (simulated with sleep), return all results.
@@ -25,10 +30,19 @@ pub async fn concurrent_squares(n: usize) -> Vec<usize> {
 ///
 /// Key: All tasks should execute concurrently, total duration should be close to single task duration, not sum of all tasks.
 pub async fn parallel_sleep_tasks(n: usize, duration_ms: u64) -> Vec<usize> {
-    // TODO: Create asynchronous task for each id in 0..n
-    // TODO: Each task sleeps specified duration and returns its own id
-    // TODO: Collect all results and sort
-    todo!()
+    use tokio::spawn;
+    let mut tasks = Vec::with_capacity(n);
+    for i in 0..n {
+        tasks.push(spawn(async move {
+            sleep(Duration::from_millis(duration_ms)).await;
+            i
+        }));
+    }
+    let mut ret = Vec::with_capacity(tasks.len());
+    for task in tasks {
+        ret.push(task.await.unwrap());
+    }
+    ret
 }
 
 #[cfg(test)]
