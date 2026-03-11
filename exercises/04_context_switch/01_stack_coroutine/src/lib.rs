@@ -12,7 +12,7 @@
 //! ## riscv64 ABI (for this exercise)
 //! - Callee-saved: `sp`, `ra`, `s0`–`s11`. The `ret` instruction is `jalr zero, 0(ra)`.
 //! - First and second arguments: `a0` (old context), `a1` (new context).
-#![feature(naked_functions_rustic_abi)]
+// #![feature(naked_functions_rustic_abi)]
 #![cfg(target_arch = "riscv64")]
 
 /// Saved register state for one task (riscv64). Layout must match the offsets used in the asm below: for one task (riscv64). Layout must match the offsets used in the asm below:
